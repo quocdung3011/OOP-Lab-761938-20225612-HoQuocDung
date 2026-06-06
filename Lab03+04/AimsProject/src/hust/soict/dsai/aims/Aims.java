@@ -80,7 +80,11 @@ public class Aims {
                     for (Media m : store.getItemsInStore()) {
                         if (m.getTitle().equalsIgnoreCase(pt)
                             && m instanceof hust.soict.dsai.aims.media.Playable) {
-                            ((hust.soict.dsai.aims.media.Playable) m).play();
+                            try {
+                                ((hust.soict.dsai.aims.media.Playable) m).play();
+                            } catch (hust.soict.dsai.aims.exception.PlayerException e) {
+                                System.err.println("Cannot play this media: " + e.getMessage());
+                            }
                             break;
                         }
                     }
@@ -162,22 +166,31 @@ public class Aims {
                     cart.print();
                     break;
                 case 3:
-                    System.out.print("Enter title to remove: ");
-                    String t = scanner.nextLine();
-                    for (Media m : cart.getItemsOrdered()) {
-                        if (m.getTitle().equalsIgnoreCase(t)) {
-                            cart.removeMedia(m);
+                    System.out.print("Enter title to play: ");
+                    String pt = scanner.nextLine();
+                    for (Media m : store.getItemsInStore()) {
+                        if (m.getTitle().equalsIgnoreCase(pt)
+                            && m instanceof hust.soict.dsai.aims.media.Playable) {
+                            try {
+                                ((hust.soict.dsai.aims.media.Playable) m).play();
+                            } catch (hust.soict.dsai.aims.exception.PlayerException e) {
+                                System.err.println("Cannot play this media: " + e.getMessage());
+                            }
                             break;
                         }
                     }
                     break;
                 case 4:
                     System.out.print("Enter title to play: ");
-                    String pt = scanner.nextLine();
+                    String ptCart = scanner.nextLine();
                     for (Media m : cart.getItemsOrdered()) {
-                        if (m.getTitle().equalsIgnoreCase(pt)
+                        if (m.getTitle().equalsIgnoreCase(ptCart)
                             && m instanceof hust.soict.dsai.aims.media.Playable) {
-                            ((hust.soict.dsai.aims.media.Playable) m).play();
+                            try {
+                                ((hust.soict.dsai.aims.media.Playable) m).play();
+                            } catch (hust.soict.dsai.aims.exception.PlayerException e) {
+                                System.err.println("Cannot play this media: " + e.getMessage());
+                            }
                             break;
                         }
                     }

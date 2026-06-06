@@ -5,7 +5,7 @@ import hust.soict.dsai.aims.disc.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.Track;
-
+import hust.soict.dsai.aims.exception.PlayerException; 
 public class CartTest {
     public static void main(String[] args) {
         Cart cart = new Cart();
@@ -30,11 +30,21 @@ public class CartTest {
         // Test print
         cart.print();
 
-        // Test play
+        // Test play (Đã sửa lại với khối try-catch)
         System.out.println("\n--- Play ---");
-        dvd.play();
-        cd.play();
-     // Test Polymorphism với toString()
+        try {
+            dvd.play();
+        } catch (PlayerException e) {
+            System.err.println("Lỗi khi phát DVD: " + e.getMessage());
+        }
+
+        try {
+            cd.play();
+        } catch (PlayerException e) {
+            System.err.println("Lỗi khi phát CD: " + e.getMessage());
+        }
+
+        // Test Polymorphism với toString()
         System.out.println("\n--- Polymorphism ---");
         java.util.ArrayList<hust.soict.dsai.aims.media.Media> mediaList 
             = new java.util.ArrayList<>();
